@@ -1,0 +1,7 @@
+---
+# From Ansible Galaxy, specifying the version.
+- src: geerlingguy.pip
+  version: 1.3.0
+- src: geerlingguy.docker_arm
+  version: 3.1.0
+# - src: calvinbui.ansible_sonarr_docker

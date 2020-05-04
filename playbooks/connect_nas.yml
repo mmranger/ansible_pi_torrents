@@ -1,0 +1,27 @@
+- hosts: pi_torrents
+  become: yes
+  tasks:
+    - name: 'make sure user nas directory owner is present'
+      user:
+        name: mmranger
+        password: "{{ pi_ssh_pass | password_hash('sha512', 'mysecretsalt') }}"
+        state: present
+    - name: 'verify nas attachment Dependencies present'
+      package: 
+        name: 
+          - 'cifs-utils'
+          - smbclient
+        state: present
+    - name: 'make directory for nas to attach to'
+      file:
+        path: /media/videos
+        owner: mmranger
+        group: mmranger
+        state: directory
+    - name: 'mount nas directory for videos'
+      mount:
+        path: /media/videos
+        src: //192.168.1.22/NAS
+        fstype: auto
+        opts: vers=1.0,users,auto,user_xattr,username=mmranger,password={{ pi_ssh_pass }}
+        state: mounted

@@ -1,0 +1,16 @@
+---
+- hosts: pi_torrents
+  become: yes
+  vars:
+    pip_package: python3-pip
+    pip_install_packages:
+      - name: docker
+    docker_install_compose: true
+    docker_version: "5:19.03.8~3-0~raspbian-buster"
+    # docker_version: "5:19.03.8~3-0~raspbian-stretch"
+    docker_pip_executable: pip3
+    docker_users:
+      - pi
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker_arm
