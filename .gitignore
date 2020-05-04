@@ -1,2 +1,3 @@
 py3-ansible/*
 .ansible/vault-pass.yml
+inventories/*
